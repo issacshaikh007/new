@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Multipication table</title>
+    
+</head>
+<body>
+
+  <style>
+    .main-table{
+    background-color: lightskyblue;
+    height: 500px;
+    width: 350px;
+}
+
+.row1,.row2,.row3,.row4,
+.row5,.row6,.row7,.row8,
+.row9,.row10{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 30px;
+    position:relative;
+    height: 20px;
+     color: black;
+     font-weight: bold;
+}
+
+
+input{
+    width: 342px;
+    display: block;
+    box-shadow: 4px 4px 4px red;
+}
+
+input:hover{
+ box-shadow: 4px 4px 4px red;
+}
+
+input:active{
+ background-color: pink;
+ border-color: white;
+ box-shadow: none;
+ border-radius: 4px;
+}
+
+button{
+    position:absolute;
+    right: 50px;
+    transition: 0.15s;
+    box-shadow: 3px 3px 3px red;
+}
+
+button:hover{
+    cursor: pointer;
+
+}
+
+button:active{
+  background-color:lightskyblue;
+  border-color:lightskyblue;
+  box-shadow: none; 
+  border-radius: 4px;
+}
+
+
+.sign{
+    position:absolute;
+    right: 200px;
+}
+
+.multiples{
+    position:absolute;
+    right: 120px;
+}
+
+.press-me{
+    position: absolute;
+    left: 8px;
+    width:100px;
+    box-shadow: none;
+    background-Color:lightpink;
+    border-Radius: 4px;
+    border-color: white;
+    border:none;
+}
+
+.clearall{
+
+        position: absolute;
+        left: 258px;
+        width:100px;
+        box-shadow: none;
+        background-Color:lightpink;
+        border-Radius: 4px;
+        border-color: white;
+        border:none;
+}
+
+.clear{
+    position: absolute;
+        left: 137px;
+        width:100px;
+        box-shadow: none;
+        background-Color:lightpink;
+        border-Radius: 4px;
+        border-color: white;
+        border:none;
+}
+
+.press-me:hover{
+    background-color: lightpink !important;
+    cursor: pointer;
+    border: none !important;
+    border-radius: 4px !important;
+}
+
+
+.press-me:active{
+    background-color: white;
+    border-color: white;
+    box-shadow: none;
+    border-radius: 4px;
+}
+
+
+.text-header{
+  font-weight: bold;
+  margin-left: 80px;
+  
+  
+}
+.div-header{
+    width: 350px;
+  background-color:lightskyblue
+}
+  </style>
+
+  <div class="div-header">
+    <div class="text-header">Multiplication Tables</div>
+  <input id="num" type="number" placeholder="enter number for below table
+  " oninput="checkNumberFieldLength(this);"/>
+  <button id="pressbutton" class="press-me" onclick=update() disabled>Enter</button>
+  <button id="all" class="clearall" onclick="cleartable()" disabled>clear all</button>
+  <button id="clearcurrent" class="clear" onclick="clearcurrenttable()" disabled>reset result</button>
+  </div>
+  
+    <div class="main-table">
+      <div class="row1">
+        <div id="rownum1">0</div>
+        <div class="sign">x</div>
+        <div class="multiples">1</div>
+        <button onclick=equal1to()>=</button>
+        <div id="answer1"></div>
+      </div>
+       <div class="row2">
+        <div id="rownum2">0</div>
+        <div class="sign">x</div>
+        <div class="multiples">2</div>
+        <button onclick=equal2to()>=</button>
+        <div id="answer2"></div>
+       </div>
+       <div class="row3">
+        <div id="rownum3">0</div>
+        <div class="sign">x</div>
+        <div class="multiples">3</div>
+        <button onclick=equal3to()>=</button>
+        <div id="answer3"></div>
+       </div>
+       <div class="row4">
+        <div id="rownum4">0</div>
+        <div class="sign">x</div>
+        <div class="multiples">4</div>
+        <button onclick=equal4to()>=</button>
+        <div id="answer4"></div>
+       </div>
+       <div class="row5">
+        <div id="rownum5">0</div>
+        <div class="sign">x</div>
+        <div class="multiples">5</div>
+        <button onclick=equal5to()>=</button>
+        <div id="answer5"></div>
+       </div>
+       <div class="row6">
+        <div id="rownum6">0</div>
+        <div class="sign">x</div>
+        <div class="multiples">6</div>
+        <button onclick=equal6to()>=</button>
+        <div id="answer6"></div>
+       </div>
+       <div class="row7">
+        <div id="rownum7">0</div>
+        <div class="sign">x</div>
+        <div class="multiples">7</div>
+        <button onclick=equal7to()>=</button>
+        <div id="answer7"></div>
+       </div>
+       <div class="row8">
+        <div id="rownum8">0</div>
+        <div class="sign">x</div>
+        <div class="multiples">8</div>
+        <button onclick=equal8to()>=</button>
+        <div id="answer8"></div>
+        </div>
+       <div class="row9">
+        <div id="rownum9">0</div>
+        <div class="sign">x</div>
+        <div class="multiples">9</div>
+        <button onclick=equal9to()>=</button>
+        <div id="answer9"></div>
+       </div>
+       <div class="row10">
+        <div id="rownum10">0</div>
+        <div class="sign">x</div>
+        <div class="multiples">10</div>
+        <button onclick=equal10to()>=</button>
+        <div id="answer10"></div>
+       </div>
+    </div>
+    
+
+<script>
+
+function checkNumberFieldLength(elem){
+    if (elem.value.length > 4) {
+        elem.value = elem.value.slice(0,4); 
+    }
+    
+    if (document.getElementById("num").value!="") {
+                pressbutton.disabled= false;  
+                pressbutton.style.boxShadow="3px 3px 3px red";
+                pressbutton.style.backgroundColor="buttonface";
+                pressbutton.style.borderRadius="0px";
+                pressbutton.style.borderColor="buttonface";
+                pressbutton.style.border="outset";
+                pressbutton.style.borderWidth="2px";
+                pressbutton.style.borderImage="initial"
+                
+                console.log("enabled")
+              } else {
+                pressbutton.disabled= true;
+                console.log("disabled");
+              }
+}
+  
+  function update(){
+    let tableNumber=
+    document.getElementById("num").value;
+    //console.log(tableNumber);
+    let updateNumber1=
+    document.getElementById("rownum1");
+    let updateNumber2=document.
+    getElementById("rownum2");
+    updateNumber1.innerText=tableNumber;
+    updateNumber2.innerText=tableNumber;
+    let updateNumber3=document.
+    getElementById("rownum3");
+    let updateNumber4=document.
+    getElementById("rownum4");
+    let updateNumber5=document.
+    getElementById("rownum5");
+    let updateNumber6=document.
+    getElementById("rownum6");
+    let updateNumber7=document.
+    getElementById("rownum7");
+    let updateNumber8=document.
+    getElementById("rownum8");
+    let updateNumber9=document.
+    getElementById("rownum9");
+    let updateNumber10=document.
+    getElementById("rownum10");
+    updateNumber3.innerText=tableNumber;
+    updateNumber4.innerText=tableNumber;
+    updateNumber5.innerText=tableNumber;
+    updateNumber6.innerText=tableNumber;
+    updateNumber7.innerText=tableNumber;
+    updateNumber8.innerText=tableNumber;
+    updateNumber9.innerText=tableNumber;
+    updateNumber10.innerText=tableNumber;
+    document.getElementById("answer1").innerText="";
+    document.getElementById("answer2").innerText="";
+    document.getElementById("answer3").innerText="";
+    document.getElementById("answer4").innerText="";
+    document.getElementById("answer5").innerText="";
+    document.getElementById("answer6").innerText="";
+    document.getElementById("answer7").innerText="";
+    document.getElementById("answer8").innerText="";
+    document.getElementById("answer9").innerText="";
+    document.getElementById("answer10").innerText="";
+    pressbutton.disabled= true;
+    pressbutton.style.backgroundColor="lightpink";
+    pressbutton.style.boxShadow="none";
+    pressbutton.style.borderRadius= "4px";
+    pressbutton.style.borderColor="white";
+    pressbutton.style.border="none";
+    num.disabled=true;
+    clearcurrent.disabled=false;
+    clearcurrent.style.boxShadow="3px 3px 3px red";
+    clearcurrent.style.backgroundColor="buttonface";
+    clearcurrent.style.borderRadius="0px";
+    clearcurrent.style.borderColor="buttonface";
+    clearcurrent.style.border="outset";
+    clearcurrent.style.borderWidth="2px";
+    clearcurrent.style.borderImage="initial"
+    all.disabled=false;
+    all.style.boxShadow="3px 3px 3px red";
+    all.style.backgroundColor="buttonface";
+    all.style.borderRadius="0px";
+    all.style.borderColor="buttonface";
+    all.style.border="outset";
+    all.style.borderWidth="2px";
+    all.style.borderImage="initial"
+  }
+
+  function clearcurrenttable(){
+    document.getElementById("answer1").innerText="";
+    document.getElementById("answer2").innerText="";
+    document.getElementById("answer3").innerText="";
+    document.getElementById("answer4").innerText="";
+    document.getElementById("answer5").innerText="";
+    document.getElementById("answer6").innerText="";
+    document.getElementById("answer7").innerText="";
+    document.getElementById("answer8").innerText="";
+    document.getElementById("answer9").innerText="";
+    document.getElementById("answer10").innerText="";
+    clearcurrent.disabled=true;
+    clearcurrent.style.backgroundColor="lightpink";
+    clearcurrent.style.boxShadow="none";
+    clearcurrent.style.borderRadius= "4px";
+    clearcurrent.style.borderColor="white";
+    clearcurrent.style.border="none";
+    num.value="";
+    num.disabled=false;
+  }
+  
+function cleartable(){
+  
+    window.location.reload();
+    all.disabled=true;
+    all.style.backgroundColor="lightpink";
+    all.style.boxShadow="none";
+    all.style.borderRadius= "4px";
+    all.style.borderColor="white";
+    all.style.border="none";
+
+}
+function equal1to(){
+  let result=document.getElementById("answer1")
+  result.innerText=document.getElementById("rownum1").innerText *1
+  clearcurrent.disabled=false;
+  clearcurrent.style.boxShadow="3px 3px 3px red";
+  clearcurrent.style.backgroundColor="buttonface";
+  clearcurrent.style.borderRadius="0px";
+  clearcurrent.style.borderColor="buttonface";
+  clearcurrent.style.border="outset";
+  clearcurrent.style.borderWidth="2px";
+  clearcurrent.style.borderImage="initial"
+  all.disabled=false;
+  all.style.boxShadow="3px 3px 3px red";
+  all.style.backgroundColor="buttonface";
+  all.style.borderRadius="0px";
+  all.style.borderColor="buttonface";
+  all.style.border="outset";
+  all.style.borderWidth="2px";
+  all.style.borderImage="initial"
+
+}
+
+function equal2to(){
+  let result= document.getElementById("answer2");
+  result.innerText=document.getElementById("rownum2").innerText *2;
+  clearcurrent.disabled=false;
+  clearcurrent.style.boxShadow="3px 3px 3px red";
+  clearcurrent.style.backgroundColor="buttonface";
+  clearcurrent.style.borderRadius="0px";
+  clearcurrent.style.borderColor="buttonface";
+  clearcurrent.style.border="outset";
+  clearcurrent.style.borderWidth="2px";
+  clearcurrent.style.borderImage="initial"
+  all.disabled=false;
+  all.style.boxShadow="3px 3px 3px red";
+  all.style.backgroundColor="buttonface";
+  all.style.borderRadius="0px";
+  all.style.borderColor="buttonface";
+  all.style.border="outset";
+  all.style.borderWidth="2px";
+  all.style.borderImage="initial"
+}
+
+function equal3to(){
+  let result= document.getElementById("answer3");
+  result.innerText=document.getElementById("rownum3").innerText *3;
+  clearcurrent.disabled=false;
+  clearcurrent.style.boxShadow="3px 3px 3px red";
+  clearcurrent.style.backgroundColor="buttonface";
+  clearcurrent.style.borderRadius="0px";
+  clearcurrent.style.borderColor="buttonface";
+  clearcurrent.style.border="outset";
+  clearcurrent.style.borderWidth="2px";
+  clearcurrent.style.borderImage="initial"
+  all.disabled=false;
+  all.style.boxShadow="3px 3px 3px red";
+  all.style.backgroundColor="buttonface";
+  all.style.borderRadius="0px";
+  all.style.borderColor="buttonface";
+  all.style.border="outset";
+  all.style.borderWidth="2px";
+  all.style.borderImage="initial"
+}
+function equal4to(){
+  let result= document.getElementById("answer4");
+  result.innerText=document.getElementById("rownum4").innerText *4;
+  clearcurrent.disabled=false;
+  clearcurrent.style.boxShadow="3px 3px 3px red";
+  clearcurrent.style.backgroundColor="buttonface";
+  clearcurrent.style.borderRadius="0px";
+  clearcurrent.style.borderColor="buttonface";
+  clearcurrent.style.border="outset";
+  clearcurrent.style.borderWidth="2px";
+  clearcurrent.style.borderImage="initial"
+  all.disabled=false;
+  all.style.boxShadow="3px 3px 3px red";
+  all.style.backgroundColor="buttonface";
+  all.style.borderRadius="0px";
+  all.style.borderColor="buttonface";
+  all.style.border="outset";
+  all.style.borderWidth="2px";
+  all.style.borderImage="initial"
+}
+function equal5to(){
+  let result= document.getElementById("answer5");
+  result.innerText=document.getElementById("rownum5").innerText *5;
+  clearcurrent.disabled=false;
+  clearcurrent.style.boxShadow="3px 3px 3px red";
+  clearcurrent.style.backgroundColor="buttonface";
+  clearcurrent.style.borderRadius="0px";
+  clearcurrent.style.borderColor="buttonface";
+  clearcurrent.style.border="outset";
+  clearcurrent.style.borderWidth="2px";
+  clearcurrent.style.borderImage="initial"
+  all.disabled=false;
+  all.style.boxShadow="3px 3px 3px red";
+  all.style.backgroundColor="buttonface";
+  all.style.borderRadius="0px";
+  all.style.borderColor="buttonface";
+  all.style.border="outset";
+  all.style.borderWidth="2px";
+  all.style.borderImage="initial"
+}
+function equal6to(){
+  let result= document.getElementById("answer6");
+  result.innerText=document.getElementById("rownum6").innerText *6;
+  clearcurrent.disabled=false;
+  clearcurrent.style.boxShadow="3px 3px 3px red";
+  clearcurrent.style.backgroundColor="buttonface";
+  clearcurrent.style.borderRadius="0px";
+  clearcurrent.style.borderColor="buttonface";
+  clearcurrent.style.border="outset";
+  clearcurrent.style.borderWidth="2px";
+  clearcurrent.style.borderImage="initial"
+  all.disabled=false;
+  all.style.boxShadow="3px 3px 3px red";
+  all.style.backgroundColor="buttonface";
+  all.style.borderRadius="0px";
+  all.style.borderColor="buttonface";
+  all.style.border="outset";
+  all.style.borderWidth="2px";
+  all.style.borderImage="initial"
+}
+function equal7to(){
+  let result= document.getElementById("answer7");
+  result.innerText=document.getElementById("rownum7").innerText *7;
+  clearcurrent.disabled=false;
+  clearcurrent.style.boxShadow="3px 3px 3px red";
+  clearcurrent.style.backgroundColor="buttonface";
+  clearcurrent.style.borderRadius="0px";
+  clearcurrent.style.borderColor="buttonface";
+  clearcurrent.style.border="outset";
+  clearcurrent.style.borderWidth="2px";
+  clearcurrent.style.borderImage="initial"
+  all.disabled=false;
+  all.style.boxShadow="3px 3px 3px red";
+  all.style.backgroundColor="buttonface";
+  all.style.borderRadius="0px";
+  all.style.borderColor="buttonface";
+  all.style.border="outset";
+  all.style.borderWidth="2px";
+  all.style.borderImage="initial"
+}
+function equal8to(){
+  let result= document.getElementById("answer8");
+  result.innerText=document.getElementById("rownum8").innerText *8;
+  clearcurrent.disabled=false;
+  clearcurrent.style.boxShadow="3px 3px 3px red";
+  clearcurrent.style.backgroundColor="buttonface";
+  clearcurrent.style.borderRadius="0px";
+  clearcurrent.style.borderColor="buttonface";
+  clearcurrent.style.border="outset";
+  clearcurrent.style.borderWidth="2px";
+  clearcurrent.style.borderImage="initial"
+  all.disabled=false;
+  all.style.boxShadow="3px 3px 3px red";
+  all.style.backgroundColor="buttonface";
+  all.style.borderRadius="0px";
+  all.style.borderColor="buttonface";
+  all.style.border="outset";
+  all.style.borderWidth="2px";
+  all.style.borderImage="initial"
+}
+function equal9to(){
+  let result= document.getElementById("answer9");
+  result.innerText=document.getElementById("rownum9").innerText *9;
+  clearcurrent.disabled=false;
+  clearcurrent.style.boxShadow="3px 3px 3px red";
+  clearcurrent.style.backgroundColor="buttonface";
+  clearcurrent.style.borderRadius="0px";
+  clearcurrent.style.borderColor="buttonface";
+  clearcurrent.style.border="outset";
+  clearcurrent.style.borderWidth="2px";
+  clearcurrent.style.borderImage="initial"
+  all.disabled=false;
+  all.style.boxShadow="3px 3px 3px red";
+  all.style.backgroundColor="buttonface";
+  all.style.borderRadius="0px";
+  all.style.borderColor="buttonface";
+  all.style.border="outset";
+  all.style.borderWidth="2px";
+  all.style.borderImage="initial"
+}
+function equal10to(){
+  let result= document.getElementById("answer10");
+  result.innerText=document.getElementById("rownum10").innerText *10;
+  clearcurrent.disabled=false;
+  clearcurrent.style.boxShadow="3px 3px 3px red";
+  clearcurrent.style.backgroundColor="buttonface";
+  clearcurrent.style.borderRadius="0px";
+  clearcurrent.style.borderColor="buttonface";
+  clearcurrent.style.border="outset";
+  clearcurrent.style.borderWidth="2px";
+  clearcurrent.style.borderImage="initial"
+  all.disabled=false;
+  all.style.boxShadow="3px 3px 3px red";
+  all.style.backgroundColor="buttonface";
+  all.style.borderRadius="0px";
+  all.style.borderColor="buttonface";
+  all.style.border="outset";
+  all.style.borderWidth="2px";
+  all.style.borderImage="initial"
+}
+
+
+
+</script>   
+
+    
+</body>
+</html>
